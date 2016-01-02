@@ -1,8 +1,11 @@
 package sample.spaceReduction.mds;
 
 
+import javafx.util.Pair;
 import sample.distanceMetric.Metric;
 import sample.model.Matrix;
+import sample.spaceReduction.pca.ClassicalPCA;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,12 +58,70 @@ public class MultidimensionalScaling {
     }
 
     //+
-    private void initializeSkeleton() {
-        System.out.println("initializeSkeleton");
-        skeleton = new ArrayList<>();
+//    private void initializeSkeleton() {
+//        System.out.println("initializeSkeleton");
+//        skeleton = new ArrayList<>();
+//        int objectCount = data.getRowsCount();
+//        double maxDistance = distances.getValueAt(0, 1);
+//        int obj1 = 0, obj2 = 1, obj3 = 2;
+//        for (int objPos1 = 0; objPos1 < objectCount; objPos1++){
+//            for (int objPos2 = objPos1 + 1; objPos2 < objectCount; objPos2++) {
+//                if (distances.getValueAt(objPos1, objPos2) > maxDistance) {
+//                    maxDistance = distances.getValueAt(objPos1, objPos2);
+//                    obj1 = objPos1;
+//                    obj2 = objPos2;
+//                }
+//            }
+//        }
+//
+//        skeleton.add(obj1);
+//        skeleton.add(obj2);
+//        for (int i = 0; i < newDimensionalSize; i++){
+//            transformedData.setValueAt(obj1, i, 0.0);
+//            transformedData.setValueAt(obj2, i, i == 0? maxDistance : 0.0);
+//        }
+//
+//        maxDistance = 0.0;
+//        double min;
+//        for (int objPos = 0; objPos < objectCount; objPos++){
+//            min = Math.min(distances.getValueAt(obj1, objPos), distances.getValueAt(obj2, objPos));
+//            if (min > maxDistance) {maxDistance = min; obj3 = objPos;}
+//        }
+//
+//        skeleton.add(obj3);
+//        double x = ( distances.getValueAt(obj1, obj3)*distances.getValueAt(obj1, obj3) + distances.getValueAt(obj1, obj2)*distances.getValueAt(obj1, obj2)
+//                - distances.getValueAt(obj2, obj3)*distances.getValueAt(obj2, obj3) ) / (2.0*distances.getValueAt(obj1, obj2));
+//        double y = Math.sqrt(distances.getValueAt(obj1, obj3)*distances.getValueAt(obj1, obj3) - x*x);
+//        transformedData.setValueAt(obj3, 0, x);
+//        transformedData.setValueAt(obj3, 1, y);
+//        for (int i = 2; i < newDimensionalSize; i++) transformedData.setValueAt(obj3, i, 0.0);//<--- there need to add newDimenSize + 1 point
+//    }
+
+    private void initializeSkeleton(){
+        int size = newDimensionalSize + 1;
+        skeleton = findMostDistancePoint(size);
+
+        double[][] points = new double[size][data.getColumnCount()];
+        for (int i = 0; i < size; i++) points[i] = data.getRow(skeleton.get(i));
+
+        ClassicalPCA pca = new ClassicalPCA();
+        Pair<List<Double>, double[][]> pair =  pca.reduceSpace(points, E, 500);
+        double[][] temp = pair.getValue();
+
+        for (int j = 0; j < size; j++){
+            int point = skeleton.get(j);
+            for (int i = 0; i < newDimensionalSize; i++){
+                transformedData.setValueAt(point, i, temp[j][i]);
+            }
+        }
+    }
+
+    private ArrayList<Integer> findMostDistancePoint(int size){
+        ArrayList<Integer> points = new ArrayList<>();
         int objectCount = data.getRowsCount();
         double maxDistance = distances.getValueAt(0, 1);
-        int obj1 = 0, obj2 = 1, obj3 = 2;
+        int obj1 = 0, obj2 = 1, objN = 2;
+
         for (int objPos1 = 0; objPos1 < objectCount; objPos1++){
             for (int objPos2 = objPos1 + 1; objPos2 < objectCount; objPos2++) {
                 if (distances.getValueAt(objPos1, objPos2) > maxDistance) {
@@ -71,27 +132,29 @@ public class MultidimensionalScaling {
             }
         }
 
-        skeleton.add(obj1);
-        skeleton.add(obj2);
-        for (int i = 0; i < newDimensionalSize; i++){
-            transformedData.setValueAt(obj1, i, 0.0);
-            transformedData.setValueAt(obj2, i, i == 0? maxDistance : 0.0);
-        }
+        points.add(obj1);
+        points.add(obj2);
 
-        maxDistance = 0.0;
         double min;
-        for (int objPos = 0; objPos < objectCount; objPos++){
-            min = Math.min(distances.getValueAt(obj1, objPos), distances.getValueAt(obj2, objPos));
-            if (min > maxDistance) {maxDistance = min; obj3 = objPos;}
-        }
+        while (points.size() < size) {
+            maxDistance = 0.0;
 
-        skeleton.add(obj3);
-        double x = ( distances.getValueAt(obj1, obj3)*distances.getValueAt(obj1, obj3) + distances.getValueAt(obj1, obj2)*distances.getValueAt(obj1, obj2)
-                - distances.getValueAt(obj2, obj3)*distances.getValueAt(obj2, obj3) ) / (2.0*distances.getValueAt(obj1, obj2));
-        double y = Math.sqrt(distances.getValueAt(obj1, obj3)*distances.getValueAt(obj1, obj3) - x*x);
-        transformedData.setValueAt(obj3, 0, x);
-        transformedData.setValueAt(obj3, 1, y);
-        for (int i = 2; i < newDimensionalSize; i++) transformedData.setValueAt(obj3, i, 0.0);//<--- there need to add newDimenSize + 1 point
+            for (int objPos = 0; objPos < objectCount; objPos++) {
+                min = distances.getValueAt(obj1, objPos);
+                for (Integer point : points) {
+                    if (min > distances.getValueAt(point, objPos)) {
+                        min = distances.getValueAt(point, objPos);
+                    }
+                }
+                if (min > maxDistance) {
+                    maxDistance = min;
+                    objN = objPos;
+                }
+            }
+
+            points.add(objN);
+        }
+        return points;
     }
 
     private void buildSkeleton(){
@@ -224,7 +287,7 @@ public class MultidimensionalScaling {
                 double dif = Math.abs(x1.getValueAt(i, j) - x2.getValueAt(i, j));
                 if (max < dif) max = dif;
             }
-        System.out.println("Max deviation: " + max);
+       // System.out.println("Max deviation: " + max);
         return max;
     }
 

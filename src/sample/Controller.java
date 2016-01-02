@@ -1,5 +1,6 @@
 package sample;
 
+import com.sun.deploy.uitoolkit.impl.fx.ui.FXMessageDialog;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -27,6 +28,7 @@ import sample.spaceReduction.pca.ClassicalPCA;
 import sample.utils.MatrixFileUtils;
 import sample.visualization.ParallelCoordChart.ParallelCoordsChart;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -249,7 +251,6 @@ public class Controller {
                 Platform.runLater(() ->{
                     MultidimensionalScaling multidimensionalScaling = new MultidimensionalScaling(new EuclideMetric(), skeletonSize, newDimensionalSize);
                     currentData = multidimensionalScaling.applyAlgrorithm(inputData.getData());
-                    System.out.println("End multiscalling alg");
                     TableHelper.fillData(currentData, transformedData);
                    SherdsDiagramHelper.showDiagram(shepardaDiagram, inputData, currentData, new EuclideMetric());
                 });

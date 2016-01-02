@@ -3,9 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/Simple_Data_Mining_jar</output-path>
     <root id="archive" name="Simple Data Mining.jar">
       <element id="module-output" name="Simple Data Mining" />
-      <element id="library" level="project" name="New folder" />
-      <element id="extracted-dir" path="$USER_HOME$/Desktop/parallel coords/parvis-0.3.1b.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/Desktop/parallel coords/xdat.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/library/Jama-1.0.2.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

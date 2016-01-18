@@ -3,7 +3,6 @@ package sample.utils;
 import sample.model.Matrix;
 
 import java.io.*;
-import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 public class MatrixFileUtils {

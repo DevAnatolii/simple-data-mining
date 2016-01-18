@@ -1,6 +1,6 @@
-package sample.algorithm.em;
+package sample.clusteringAlgorithm.em;
 
-import sample.algorithm.ICluster;
+import sample.clusteringAlgorithm.ICluster;
 import sample.model.Matrix;
 
 import java.util.ArrayList;

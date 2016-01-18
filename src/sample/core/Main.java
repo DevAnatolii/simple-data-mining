@@ -1,4 +1,4 @@
-package sample;
+package sample.core;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,8 +12,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
         Parent root = loader.load();
-        Controller controller = loader.getController();
-        controller.setStage(primaryStage);
+        MainController mainController = loader.getController();
+        mainController.setStage(primaryStage);
         primaryStage.setTitle("Simple Data Mining");
         primaryStage.setScene(new Scene(root, 850, 550));
         primaryStage.show();

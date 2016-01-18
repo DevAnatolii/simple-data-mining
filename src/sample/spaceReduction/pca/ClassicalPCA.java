@@ -1,8 +1,6 @@
 package sample.spaceReduction.pca;
 
-import Jama.Matrix;
 import javafx.util.Pair;
-import sample.utils.Helper;
 import sample.utils.MatrixUtil;
 import sample.utils.StatisticAlgebra;
 
@@ -48,24 +46,6 @@ public class ClassicalPCA {
             }
         }
         return res;
-    }
-
-    public static void main(String[] args){
-        double[] _v = new double[] { 1, 0, 3 };
-
-        double[][] _data = {
-                    new double[] {1, 2, 23},
-                    new double[] {-3, 17, 5},
-                    new double[] {13, -6, 7},
-                    new double[] {7, 8, -9}
-        };
-
-        Matrix matrix = new Matrix(_data);
-        ClassicalPCA pca = new ClassicalPCA();
-      //  pca.reduceSpace(_data, 2, 0.0001, 1000);
-        double[] reduced = pca.transform(_v);
-        double[] expReduced = new double[] {-2.75008, 0.19959};
-        System.out.println("test status : " + Helper.AreEqualVectors(expReduced, reduced, 0.001));
     }
 
 }

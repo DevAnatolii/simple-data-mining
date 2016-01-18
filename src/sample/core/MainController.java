@@ -1,6 +1,5 @@
-package sample;
+package sample.core;
 
-import com.sun.deploy.uitoolkit.impl.fx.ui.FXMessageDialog;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -14,9 +13,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Pair;
-import sample.algorithm.AlgorithmFabric;
-import sample.algorithm.IAlgorithm;
-import sample.algorithm.ICluster;
+import sample.clusteringAlgorithm.AlgorithmFabric;
+import sample.clusteringAlgorithm.IAlgorithm;
+import sample.clusteringAlgorithm.ICluster;
 import sample.delegates.ChartHelper;
 import sample.delegates.SherdsDiagramHelper;
 import sample.delegates.TableHelper;
@@ -26,15 +25,14 @@ import sample.model.Matrix;
 import sample.spaceReduction.mds.MultidimensionalScaling;
 import sample.spaceReduction.pca.ClassicalPCA;
 import sample.utils.MatrixFileUtils;
-import sample.visualization.ParallelCoordChart.ParallelCoordsChart;
+import sample.visualization.parallelCoordChart.ParallelCoordsChart;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import static sample.algorithm.AlgorithmFabric.*;
+import static sample.clusteringAlgorithm.AlgorithmFabric.*;
 
-public class Controller {
+public class MainController {
     private static final String VISUALIZATION_METHOD_PARALLEL_COORD = "Parallel Coordinates Chart";
     private static final String VISUALIZATION_METHOD_2D_CHART = "Simple 2D Chart";
 

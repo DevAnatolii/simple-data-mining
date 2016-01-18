@@ -1,11 +1,10 @@
-package sample.algorithm.kmeans;
+package sample.clusteringAlgorithm.kmeans;
 
-import sample.algorithm.IAlgorithm;
-import sample.algorithm.ICluster;
+import sample.clusteringAlgorithm.IAlgorithm;
+import sample.clusteringAlgorithm.ICluster;
 import sample.distanceMetric.EuclideMetric;
 import sample.model.Matrix;
 
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

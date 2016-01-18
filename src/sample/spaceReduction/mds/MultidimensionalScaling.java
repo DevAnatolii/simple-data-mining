@@ -57,46 +57,6 @@ public class MultidimensionalScaling {
             }
     }
 
-    //+
-//    private void initializeSkeleton() {
-//        System.out.println("initializeSkeleton");
-//        skeleton = new ArrayList<>();
-//        int objectCount = data.getRowsCount();
-//        double maxDistance = distances.getValueAt(0, 1);
-//        int obj1 = 0, obj2 = 1, obj3 = 2;
-//        for (int objPos1 = 0; objPos1 < objectCount; objPos1++){
-//            for (int objPos2 = objPos1 + 1; objPos2 < objectCount; objPos2++) {
-//                if (distances.getValueAt(objPos1, objPos2) > maxDistance) {
-//                    maxDistance = distances.getValueAt(objPos1, objPos2);
-//                    obj1 = objPos1;
-//                    obj2 = objPos2;
-//                }
-//            }
-//        }
-//
-//        skeleton.add(obj1);
-//        skeleton.add(obj2);
-//        for (int i = 0; i < newDimensionalSize; i++){
-//            transformedData.setValueAt(obj1, i, 0.0);
-//            transformedData.setValueAt(obj2, i, i == 0? maxDistance : 0.0);
-//        }
-//
-//        maxDistance = 0.0;
-//        double min;
-//        for (int objPos = 0; objPos < objectCount; objPos++){
-//            min = Math.min(distances.getValueAt(obj1, objPos), distances.getValueAt(obj2, objPos));
-//            if (min > maxDistance) {maxDistance = min; obj3 = objPos;}
-//        }
-//
-//        skeleton.add(obj3);
-//        double x = ( distances.getValueAt(obj1, obj3)*distances.getValueAt(obj1, obj3) + distances.getValueAt(obj1, obj2)*distances.getValueAt(obj1, obj2)
-//                - distances.getValueAt(obj2, obj3)*distances.getValueAt(obj2, obj3) ) / (2.0*distances.getValueAt(obj1, obj2));
-//        double y = Math.sqrt(distances.getValueAt(obj1, obj3)*distances.getValueAt(obj1, obj3) - x*x);
-//        transformedData.setValueAt(obj3, 0, x);
-//        transformedData.setValueAt(obj3, 1, y);
-//        for (int i = 2; i < newDimensionalSize; i++) transformedData.setValueAt(obj3, i, 0.0);//<--- there need to add newDimenSize + 1 point
-//    }
-
     private void initializeSkeleton(){
         int size = newDimensionalSize + 1;
         skeleton = findMostDistancePoint(size);

@@ -1,6 +1,6 @@
-package sample.algorithm.sem;
+package sample.clusteringAlgorithm.sem;
 
-import sample.algorithm.em.EmAlgorithm;
+import sample.clusteringAlgorithm.em.EmAlgorithm;
 import sample.model.Matrix;
 
 import java.util.Random;
@@ -12,7 +12,7 @@ public class SemAlgorithm extends EmAlgorithm{
     }
 
     protected void applyAlgorithm(){
-        System.out.println("Start algorithm");
+        System.out.println("Start clusteringAlgorithm");
         double deviation;
         randomGenerateG();
         int iterationCount = 0;
@@ -64,16 +64,6 @@ public class SemAlgorithm extends EmAlgorithm{
                 }
             }
         }
-
-//        for (int i = 0; i < objects.getRowsCount(); i++){
-//            double max = 0;
-//            for (int clazzIndex = 0; clazzIndex < numberOfClasses; clazzIndex++){
-//                if (G.getValueAt(i, clazzIndex) > max){
-//                    max = G.getValueAt(i, clazzIndex);
-//                    G.setValueAt(i, numberOfClasses, clazzIndex);
-//                }
-//            }
-//        }
     }
 
     //-----------------------------Step M------------------------------------//

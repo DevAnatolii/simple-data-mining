@@ -5,10 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
-import sample.algorithm.ICluster;
+import sample.clusteringAlgorithm.ICluster;
 import sample.model.Matrix;
-import sample.visualization.ParallelCoordChart.ParallelCoordsChart;
-import sample.visualization.ParallelCoordChart.Serie;
+import sample.visualization.parallelCoordChart.ParallelCoordsChart;
+import sample.visualization.parallelCoordChart.Serie;
 
 import java.util.ArrayList;
 import java.util.List;

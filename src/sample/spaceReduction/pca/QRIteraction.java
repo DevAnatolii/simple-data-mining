@@ -43,25 +43,4 @@ public class QRIteraction {
         return new sample.model.Matrix(a1).times(new sample.model.Matrix(a2)).getData();
     }
 
-    public static void main(String[] args){
-        double[][] a = new double[][]
-                {
-                        new double[] {1, 2, 4},
-                        new double[] {2, 9, 8},
-                        new double[] {4, 8, 2}
-                };
-
-
-        Pair<double[][], double[][]> ev = eigenVectorValuesExtractionQRIterative(a, 0.0001, 5000);
-
-
-        double expEV00 = 15.2964;
-        double expEV11 = 4.3487;
-        double expEV22 = 1.0523;
-
-        System.out.println("delta = "+ Math.abs(expEV00 - ev.getValue()[0][0]));
-        System.out.println("delta = "+ Math.abs(expEV11 - Math.abs(ev.getValue()[1][1])));
-        System.out.println("delta = "+ Math.abs(expEV22 - ev.getValue()[2][2]));
-    }
-
 }

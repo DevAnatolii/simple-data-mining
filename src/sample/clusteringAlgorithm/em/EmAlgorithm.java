@@ -1,7 +1,7 @@
-package sample.algorithm.em;
+package sample.clusteringAlgorithm.em;
 
-import sample.algorithm.IAlgorithm;
-import sample.algorithm.ICluster;
+import sample.clusteringAlgorithm.IAlgorithm;
+import sample.clusteringAlgorithm.ICluster;
 import sample.model.Matrix;
 
 
@@ -40,7 +40,7 @@ public class EmAlgorithm implements IAlgorithm{
         finestLValue = - Double.MAX_VALUE;
         for (byte i = 0; i < repeatCount; i++)
         {
-            System.out.println("Apply algorithm: " +(i+1));
+            System.out.println("Apply clusteringAlgorithm: " +(i+1));
             applyAlgorithm();
             saveFinestResult();
         }

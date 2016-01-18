@@ -1,4 +1,4 @@
-package sample.algorithm;
+package sample.clusteringAlgorithm;
 
 import java.util.List;
 

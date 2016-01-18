@@ -1,4 +1,4 @@
-package sample.algorithm.kmeans;
+package sample.clusteringAlgorithm.kmeans;
 
 import sample.distanceMetric.Metric;
 import sample.model.Matrix;
